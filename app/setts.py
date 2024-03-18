@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     password: str
     secret_key: str
 
-    model_config = SettingsConfigDict(env_file=".env")
+    class Config:
+        env_files = [".env"]
 
 settings = Settings()
+settings.dbname = "quotesapi"
