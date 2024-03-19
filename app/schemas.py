@@ -12,7 +12,6 @@ class Tag(BaseModel):
 
 class QuoteOut(BaseModel):
     id: int
-    source_id: int
     quote: str
     author: Author
     sourse: Optional[Source] = None
