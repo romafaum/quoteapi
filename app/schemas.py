@@ -7,7 +7,7 @@ class Author(BaseModel):
 class Source(BaseModel):
     name: str
 
-class Tag(BaseModel):
+class TagOut(BaseModel):
     name: str
 
 class QuoteOut(BaseModel):
@@ -15,4 +15,4 @@ class QuoteOut(BaseModel):
     quote: str
     author: Author
     sourse: Optional[Source] = None
-    tags: List[Tag]
+    tags: List[TagOut]

@@ -7,7 +7,12 @@ from  app.models import Quotes, Tag
 with open('/home/romafaum/quotesAPI/quotes.csv', newline='') as csvfile:
 
     reader = csv.DictReader(csvfile)
+    a = 0
     for row in reader:
+        if a < 150000:
+            a += 1
+            continue
+
         with SessionLocal.begin() as session:
             quote = session.query(Quotes).filter(Quotes.quote==row['quote']).first()
             if not quote:
