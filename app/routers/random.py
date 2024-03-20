@@ -12,5 +12,5 @@ router = APIRouter(
 @router.get("/", response_model=QuoteOut)
 def get_random_quote(db: Session = Depends(get_db)):
     quote = db.query(Quotes)\
-    .order_by(text('RANDOM()')).limit(1).first()
+    .order_by(text('RANDOM()')).first()
     return quote

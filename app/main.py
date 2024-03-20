@@ -23,3 +23,4 @@ def get_random_quote(db: Session = Depends(get_db)):
 
 app.include_router(search.router)
 app.include_router(random.router)
+app.include_router(authors.router)
