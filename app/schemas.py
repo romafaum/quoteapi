@@ -10,6 +10,7 @@ class Source(BaseModel):
     name: str
 
 class TagOut(BaseModel):
+    id: int
     name: str
 
 class QuoteOut(BaseModel):
@@ -19,12 +20,11 @@ class QuoteOut(BaseModel):
     sourse: Optional[Source] = None
     tags: List[TagOut]
 
-class TagInfo(BaseModel):
-    name: str
+class TagInfo(TagOut):
     total: int
 
 class AuthorOut(Author):
-    total_quotes: int
+    total: int
 
 class SourceInfo(BaseModel):
     name: str
@@ -34,3 +34,10 @@ class AuthorStats(BaseModel):
     author: AuthorOut
     top_tags: List[TagInfo]
     sources: Optional[List[SourceInfo]] = None
+
+class TagStats(BaseModel):
+    tag: TagInfo
+    related_tags: Optional[List[TagInfo]] = None
+    authors: List[AuthorOut]
+    sources: Optional[List[SourceInfo]] = None
+

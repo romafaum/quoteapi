@@ -19,12 +19,12 @@ def query_author(db):
     return author
 
 def query_tags(db, id):
-    tags = db.query(Tag.name, func.count(Tag.id).label("total"))\
+    tags = db.query(Tag.id, Tag.name, func.count(Tag.id).label("total"))\
     .join(tags_to_quotes_table)\
     .join(Quotes)\
     .join(Author)\
     .filter(Author.id == id)\
-    .group_by(Tag.name).order_by(desc("total")).limit(5)
+    .group_by(Tag.id).order_by(desc("total")).limit(5)
     return tags
 
 def query_sources(db, id):
@@ -50,11 +50,12 @@ def autor_get(id: int, db: Session = Depends(get_db)):
     tags = query_tags(db, id).all()
     sources = query_sources(db, id).all()
     author_id, author_name, total_quotes = author
-    top_tags = [TagInfo(name=row[0], total=row[1]) for row in tags]
-    result = AuthorStats(author=AuthorOut(id=author_id, fullname=author_name, total_quotes=total_quotes), top_tags=top_tags)
+    print(author_id, author_name, total_quotes)
+    top_tags = [TagInfo(id=row[0], name=row[1], total=row[2]) for row in tags]
+    result = AuthorStats(author=AuthorOut(id=author_id, fullname=author_name, total=total_quotes), top_tags=top_tags)
     if sources:
-        top_souces = [SourceInfo(name=row[0], total=row[1]) for row in sources]
-        result.sources = top_souces
+        top_sources = [SourceInfo(name=row[0], total=row[1]) for row in sources]
+        result.sources = top_sources
     return result
 
 
