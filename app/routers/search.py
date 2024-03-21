@@ -1,9 +1,9 @@
 from typing import Optional, List
-from fastapi import HTTPException, Response, status, APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy import  and_
 from sqlalchemy.orm import Session
-from ..schemas import QuoteOut, TagOut
-from ..models import Quotes, Tag, tags_to_quotes_table, Author, Source
+from ..schemas import QuoteOut
+from ..models import Quotes, Tag, Author, Source
 from ..database import get_db
 
 
