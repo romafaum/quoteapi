@@ -3,4 +3,4 @@ venv
 __pycache__
 .vscode
 .pytest_cache
-quotes.cvs
+quotes.csv
